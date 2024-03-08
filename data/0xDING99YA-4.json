@@ -1,0 +1,8 @@
+{
+  "contest": 337,
+  "handle": "0xDING99YA",
+  "risk": "2",
+  "title": "slash() on an unlocked staked can be frontrun and the user can escape the slash",
+  "issueId": 4,
+  "issueUrl": "https://github.com/code-423n4/2024-03-gitcoin-findings/issues/4"
+}
