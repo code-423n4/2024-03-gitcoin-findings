@@ -1,0 +1,8 @@
+{
+  "contest": 337,
+  "handle": "0xDING99YA",
+  "risk": "2",
+  "title": "In certain cases release() can be frontrun and will revert",
+  "issueId": 3,
+  "issueUrl": "https://github.com/code-423n4/2024-03-gitcoin-findings/issues/3"
+}
