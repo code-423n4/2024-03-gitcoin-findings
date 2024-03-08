@@ -1,0 +1,8 @@
+{
+  "contest": 337,
+  "handle": "0xDING99YA",
+  "risk": "3",
+  "title": "When release() funds, funds are not added back to userTotalStaked, which can result in a revert of future withdraw and the user can't slashed again",
+  "issueId": 2,
+  "issueUrl": "https://github.com/code-423n4/2024-03-gitcoin-findings/issues/2"
+}
