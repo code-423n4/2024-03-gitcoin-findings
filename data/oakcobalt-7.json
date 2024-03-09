@@ -1,0 +1,8 @@
+{
+  "contest": 337,
+  "handle": "oakcobalt",
+  "risk": "2",
+  "title": "release() is vulnerable to racing conditions against permissionless lockAndBurn(), users might lose released refunds",
+  "issueId": 7,
+  "issueUrl": "https://github.com/code-423n4/2024-03-gitcoin-findings/issues/7"
+}
