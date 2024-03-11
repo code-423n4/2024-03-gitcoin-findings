@@ -6,12 +6,10 @@
 ### Description
 The `IdentityStaking` contract is an implementation contract that should not allow its initialization, but lacks a constructor with a call to `_disableInitializers()`.
 
-This is particularly concerning given the contract's `UUPSUpgradeable` inheritance, which would allow an attacker to initialize and `selfdestruct` an uninitialized implementation contract by setting themselves as the admin and upgrading to a self-destructible contract. 
-
-This could be considered higher severity, but is reported as low seeing as the team intends to initialize the contract on deployment.
+While newer versions of UUPSUpgradeable such as the one `IdentityStaking` inherits from can no longer be upgraded directly via `upgradeToAndCall()`, it is safer and considered better practice to disallow the initialization of implementation contracts.
 
 ### Recommendation 
-Add a constructor to the `IdentityStaking` contract that calls `_disableInitializers()` to prevent the implementation contract from being initialized. This is safer and considered better practice than initializing the implementation.
+Add a constructor to the `IdentityStaking` contract that calls `_disableInitializers()` to prevent the implementation contract from being initialized.
 
 ## [L-02] Missing address validation in `initialize()`
 
