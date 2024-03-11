@@ -1,0 +1,8 @@
+{
+  "contest": 337,
+  "handle": "oakcobalt",
+  "risk": "2",
+  "title": "A user might escape being slashed, if they have received refunds from `release()` before",
+  "issueId": 10,
+  "issueUrl": "https://github.com/code-423n4/2024-03-gitcoin-findings/issues/10"
+}
