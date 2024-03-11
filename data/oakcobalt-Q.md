@@ -209,4 +209,47 @@ Recommendations:
 consider adding `stakee` indexed field in the event of community-stake slashing.
 
 
- 
+### Low-07 A user might be slashed with 0 amount fine due to rounding
+**Instances(1)**
+
+When a user stake dust amount, `slash()` might round the total `slashedAmount` to 0, resulting in 0 amount slashing.
+
+```solidity
+//id-staking-v2/contracts/IdentityStaking.sol
+  function slash(
+    address[] calldata selfStakers,
+    address[] calldata communityStakers,
+    address[] calldata communityStakees,
+    uint88 percent
+  ) external onlyRole(SLASHER_ROLE) whenNotPaused {
+...
+      for (uint256 i = 0; i < numSelfStakers; i++) {
+      ...
+            //@audit when dust amount, slashedAmount might round to 0, slasher role only input a percentage, the actual slashedAmount, should factor in rounding correctly.
+|>      uint88 slashedAmount = (percent * selfStakes[staker].amount) / 100;
+
+```
+(https://github.com/code-423n4/2024-03-gitcoin/blob/6529b351cd72a858541f60c52f0e5ad0fb6f1b16/id-staking-v2/contracts/IdentityStaking.sol#L443)
+
+Recommendations:
+Disallow dust amount staking. 
+
+### Low-08 Consider disabling initialize in the implementation contract
+**Instances(1)**
+id-staking-v2/contracts/IdentityStaking.sol is an implementation contract. Consider disabling the option of initializing the implementation itself by calling `_disableInitializers()` in constructor as recommended by openzeppelin.
+
+```solidity
+//id-staking-v2/node_modules/@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol
+    /**
+     * @dev Locks the contract, preventing any future reinitialization. This cannot be part of an initializer call.
+     * Calling this in the constructor of a contract will prevent that contract from being initialized or reinitialized
+     * to any version. It is recommended to use this to lock implementation contracts that are designed to be called
+     * through proxies.
+     *
+     * Emits an {Initialized} event the first time it is successfully executed.
+     */
+    function _disableInitializers() internal virtual {
+```
+
+Recommendations:
+Implement `_disableInitializers()` in id-staking-v2/contracts/IdentityStaking.sol.
