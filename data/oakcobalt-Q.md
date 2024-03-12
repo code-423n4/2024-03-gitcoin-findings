@@ -138,7 +138,7 @@ But if `lockAndBurn()` settles first, the staked amount of `sStake.slashedInRoun
 ```
 (https://github.com/code-423n4/2024-03-gitcoin/blob/6529b351cd72a858541f60c52f0e5ad0fb6f1b16/id-staking-v2/contracts/IdentityStaking.sol#L455)
 
-As seen above, `slash()` submitted close to the end of a round(90 days `burnRoundMinimumDuration`), might be counted either at the next round or current round due to potential `lockAndBurn` racing.  When `slash()` settles at the next round, the user's previous round slash amount will not be rolled over. 
+As seen above, `slash()` submitted close to the end of a round(90 days `burnRoundMinimumDuration`), might be counted either at the next round or current round due to potential `lockAndBurn` racing.  When `slash()` settles at the next round, the user's previous round slash amount will not be rolled over, and the slash amount will be directly burned instead of being preserved for the next round.
 
 Recommendations:
 Consider having `lockAndBurn()` access-controlled by the protocol to ensure `slash()`,and `lockAndBurn()` settle in the correct order.
